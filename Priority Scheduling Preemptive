@@ -1,0 +1,67 @@
+n = 5
+processes = []
+
+for i in range(n):
+    print(f"\nEnter details for P{i + 1}")
+
+    at = int(input("Arrival Time: "))
+    bt = int(input("Burst Time: "))
+    priority = int(input("Priority: "))
+
+    processes.append([f"P{i + 1}", at, bt, priority, bt])
+
+current_time = 0
+completed = []
+remaining_processes = processes.copy()
+
+while remaining_processes:
+
+
+    available = []
+    for p in remaining_processes:
+        if p[1] <= current_time and p[4]> 0:
+            available.append(p)
+
+
+    if not available:
+        current_time +=1
+        continue
+
+    selected = min(available, key=lambda x: x[3])
+    pid = selected[0]
+    at = selected[1]
+    bt = selected[2]
+    priority = selected[3]
+
+    selected[4] -= 1
+    current_time += 1
+
+    if selected[4] == 0:
+        ct = current_time
+        tat = ct - at
+        wt = tat - bt
+
+        completed.append([
+            pid, at, bt, priority, ct, tat, wt
+        ])
+
+        remaining_processes.remove(selected)
+
+print("\n")
+print("PID\tAT\tBT\tPriority\tCT\tTAT\tWT")
+print("-" * 60)
+
+total_tat = 0
+total_wt = 0
+
+for p in completed:
+    print(
+        f"{p[0]}\t{p[1]}\t{p[2]}\t"
+        f"{p[3]}\t\t{p[4]}\t{p[5]}\t{p[6]}"
+    )
+
+    total_tat += p[5]
+    total_wt += p[6]
+
+print("\nAverage Turnaround Time =", round(total_tat / n, 2))
+print("Average Waiting Time =", round(total_wt / n, 2))
