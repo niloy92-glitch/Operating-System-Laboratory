@@ -1,0 +1,29 @@
+
+
+    current_time = current_time + bt
+    ct = current_time
+
+    tat = ct - at
+    wt = tat - bt
+
+    completed.append([pid, at, bt, priority, ct, tat, wt])
+    processes.remove(selected)
+
+
+
+print("\n")
+print("PID\tAT\tBT\tPriority\tCT\tTAT\tWT")
+print("-")
+
+total_tat = 0
+total_wt = 0
+
+for p in completed:
+    print(f"{p[0]}\t{p[1]}\t{p[2]}\t{p[3]}\t\t{p[4]}\t{p[5]}\t{p[6]}")
+
+    total_tat += p[5]
+    total_wt += p[6]
+
+
+print("Average Turnaround Time =", round(total_tat / n, 2))
+print("Average Waiting Time    =", round(total_wt / n, 2))
