@@ -1,0 +1,11 @@
+req=[0,13,41,50,63,89,100]
+head = 46
+direction="left"
+left= sorted([x for x in req if x<head], reverse= True)
+right= sorted([x for x in req if x>head])
+
+
+seq = [head] + left + [0] + right
+seek_time = sum([abs(seq[i]-seq[i-1]) for i in range(1,len(seq))])
+print("Sequence",seq)
+print("seek_time:",seek_time)
