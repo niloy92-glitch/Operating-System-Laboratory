@@ -1,0 +1,17 @@
+
+req=[0,13,41,50,63,89,100]
+head = 46
+seq=[head]
+total_seek = 0
+
+while req:
+  nearest = min(req, key=lambda x: abs(x-head))
+  total_seek+=abs(nearest-head)
+  head = nearest
+  seq.append(head)
+  req.remove(nearest)
+
+print("Seek sequence",seq)
+print("Total seek time",total_seek)
+
+
