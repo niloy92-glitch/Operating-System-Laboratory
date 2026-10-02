@@ -13,6 +13,8 @@ print("Sequence",seq)
 print("seek_time:",seek_time)
 
 
+
+
 ##RIGHT
 req=[0,13,41,50,63,89,100]
 head = 46
