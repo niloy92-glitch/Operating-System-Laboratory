@@ -1,0 +1,23 @@
+pages=[1,2,3,4,1,2,3,1]
+frames = 2
+
+memory=[]
+page_hit = 0
+page_miss = 0
+
+for page in pages:
+  if page in memory:
+    page_hit +=1
+    print(page, "Page Hit", memory)
+  else:
+    if len(memory) < frames:
+      memory.append(page)
+      page_miss +=1
+      print(page, "Page Miss", memory)
+    else:
+      memory[page_miss % frames] = page
+      page_miss +=1
+      print(page, "Page Miss", memory)
+
+print("Page Hit: ", page_hit)
+print("Page Miss: ", page_miss)
